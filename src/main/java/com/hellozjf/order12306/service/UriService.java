@@ -1,6 +1,6 @@
 package com.hellozjf.order12306.service;
 
-import com.hellozjf.order12306.constants.UriEnum;
+import com.hellozjf.order12306.constant.UriEnum;
 
 import java.net.URI;
 

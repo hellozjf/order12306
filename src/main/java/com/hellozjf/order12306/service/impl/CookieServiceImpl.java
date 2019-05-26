@@ -1,6 +1,6 @@
 package com.hellozjf.order12306.service.impl;
 
-import com.hellozjf.order12306.constants.UriEnum;
+import com.hellozjf.order12306.constant.UriEnum;
 import com.hellozjf.order12306.service.CookieService;
 import com.hellozjf.order12306.service.UriService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,5 +34,30 @@ public class CookieServiceImpl implements CookieService {
         CookieManager manager = (CookieManager) httpClient.cookieHandler().get();
         List<HttpCookie> httpCookieList = manager.getCookieStore().get(uri);
         return httpCookieList;
+    }
+
+    @Override
+    public void add(HttpClient httpClient, URI uri, String name, String value) {
+        CookieManager manager = (CookieManager) httpClient.cookieHandler().get();
+        HttpCookie httpCookie = new HttpCookie(name, value);
+        manager.getCookieStore().add(uri, httpCookie);
+    }
+
+    @Override
+    public void add(HttpClient httpClient, URI uri, HttpCookie httpCookie) {
+        CookieManager manager = (CookieManager) httpClient.cookieHandler().get();
+        manager.getCookieStore().add(uri, httpCookie);
+    }
+
+    @Override
+    public String get(HttpClient httpClient, URI uri, String name) {
+        CookieManager manager = (CookieManager) httpClient.cookieHandler().get();
+        List<HttpCookie> httpCookieList = getAll(httpClient, uri);
+        for (HttpCookie httpCookie : httpCookieList) {
+            if (httpCookie.getName().equalsIgnoreCase(name)) {
+                return httpCookie.getValue();
+            }
+        }
+        return null;
     }
 }

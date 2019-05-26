@@ -1,6 +1,6 @@
 package com.hellozjf.order12306.service.impl;
 
-import com.hellozjf.order12306.constants.UriEnum;
+import com.hellozjf.order12306.constant.UriEnum;
 import com.hellozjf.order12306.service.UriService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
@@ -37,7 +37,7 @@ public class UriServiceImpl implements UriService {
     public URI getUri(UriEnum uriEnum, String params) {
         String scheme = uriEnum.getScheme();
         String host = uriEnum.getHost();
-        int port = -1;
+        int port = uriEnum.getPort();
         String path = uriEnum.getPath();
         String query = null;
         if (uriEnum.getHttpMethod().equals(HttpMethod.GET)) {
