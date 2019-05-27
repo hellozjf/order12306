@@ -88,8 +88,29 @@ public class Order12306ApplicationTests {
         return result;
     }
 
+    private String index() {
+        Map<Object, Object> params = UriEnum.INDEX.getParams();
+        String result =
+                sendService.send(httpClient,
+                        UriEnum.INDEX,
+                        params);
+        log.debug("result = {}", result);
+        return result;
+    }
+
+    private String indexFontsIconfontTtf() {
+        Map<Object, Object> params = UriEnum.INDEX_FONTS_ICONFONT.getParams();
+        String result =
+                sendService.send(httpClient,
+                        UriEnum.INDEX_FONTS_ICONFONT,
+                        params);
+        log.debug("result = {}", result);
+        return result;
+    }
+
     private ResultLogdeviceDTO otnHttpZFLogdevice() {
         Map<Object, Object> params = UriEnum.OTN_HTTPZF_LOGDEVICE.getParams();
+        params.put("timestamp", TimeUtils.currentTimeMillisStr());
         ResultLogdeviceDTO resultLogdeviceDTO =
                 sendService.send(httpClient,
                         UriEnum.OTN_HTTPZF_LOGDEVICE,
@@ -99,11 +120,13 @@ public class Order12306ApplicationTests {
                         });
         log.debug("resultLogdeviceDTO = {}", resultLogdeviceDTO);
         HttpCookie railExpiration = new HttpCookie(CookieService.RAIL_EXPIRATION, resultLogdeviceDTO.getExp());
-//        railExpiration.setDomain(".12306.cn");
+        railExpiration.setDomain(".12306.cn");
         railExpiration.setPath("/");
+        railExpiration.setVersion(0);
         HttpCookie railDeviceid = new HttpCookie(CookieService.RAIL_DEVICEID, resultLogdeviceDTO.getDfp());
-//        railDeviceid.setDomain(".12306.cn");
+        railDeviceid.setDomain(".12306.cn");
         railDeviceid.setPath("/");
+        railDeviceid.setVersion(0);
         cookieService.add(httpClient, site12306CookieUri, railExpiration);
         cookieService.add(httpClient, site12306CookieUri, railDeviceid);
         return resultLogdeviceDTO;
@@ -146,6 +169,8 @@ public class Order12306ApplicationTests {
     }
 
     private ResultUamtkStaticDTO passportWebAuthUamtkStatic() throws JsonProcessingException {
+        List<HttpCookie> httpCookieList = cookieService.getAll(httpClient, site12306CookieUri);
+        log.debug("httpCookieList = {}", httpCookieList);
         Map<Object, Object> params = UriEnum.PASSPORT_WEB_AUTH_UAMTK_STATIC.getParams();
         ResultUamtkStaticDTO resultUamtkStaticDTO =
                 sendService.send(httpClient,
@@ -332,13 +357,12 @@ public class Order12306ApplicationTests {
 
     @Test
     public void testAll() throws Exception {
-//        loadCookie(httpClient, username);
 
+        index();
         otnHttpZFGetJS();
+        indexFontsIconfontTtf();
         otnHttpZFLogdevice();
         passportWebAuthUamtkStatic();
-        otnResourcesLoginHtml();
-
         otnLoginConf();
         otnIndex12306GetLoginBanner();
         passportWebAuthUamtkStatic();

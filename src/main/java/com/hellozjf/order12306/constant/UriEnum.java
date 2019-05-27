@@ -14,6 +14,15 @@ import java.util.Map;
 @AllArgsConstructor
 public enum UriEnum {
 
+    INDEX(HttpMethod.GET, "https", "www.12306.cn", -1,
+            "/index/",
+            index()),
+    INDEX_FONTS_ICONFONT(HttpMethod.GET, "https", "www.12306.cn", -1,
+            "/index/fonts/iconfont.ttf",
+            indexFontsIconfontTtf()),
+    INDEX_OTN_INDEX12306_GETBANNER(HttpMethod.GET, "https", "www.12306.cn", -1,
+            "/index/otn/index12306/getBanner",
+            indexOtnIndex12306GetBanner()),
     OTN_HTTPZF_GETJS(HttpMethod.GET, "https", "kyfw.12306.cn", -1,
             "/otn/HttpZF/GetJS",
             otnHttpzfGetjs()),
@@ -35,7 +44,7 @@ public enum UriEnum {
     PASSPORT_CAPTCHA_CAPTCHA_IMAGE64(HttpMethod.GET, "https", "kyfw.12306.cn",-1,
             "/passport/captcha/captcha-image64",
             passportCaptchaCaptchaImage64Map()),
-    GET_ANSWER(HttpMethod.POST, "http", "aliyun.hellozjf.com", 8080,
+    GET_ANSWER(HttpMethod.POST, "http", "aliyun.hellozjf.com", 12306,
             "/result/base64",
             getAnswerMap()),
     PASSPORT_CAPTCHA_CAPTCHA_CHECK(HttpMethod.GET, "https", "kyfw.12306.cn", -1,
@@ -58,6 +67,22 @@ public enum UriEnum {
             getOtnUamauthclientMap()),
     ;
 
+    private static Map<Object, Object> indexOtnIndex12306GetBanner() {
+        Map<Object, Object> params = new HashMap<>();
+        return params;
+    }
+
+    private static Map<Object, Object> indexFontsIconfontTtf() {
+        Map<Object, Object> params = new HashMap<>();
+        params.put("t", null);
+        return params;
+    }
+
+    private static Map<Object, Object> index() {
+        Map<Object, Object> params = new HashMap<>();
+        return params;
+    }
+
     private static Map<Object, Object> otnResourcesLoginHtml() {
         Map<Object, Object> params = new HashMap<>();
         return params;
@@ -70,6 +95,29 @@ public enum UriEnum {
 
     private static Map<Object, Object> otnHttpZFLogdevice() {
         Map<Object, Object> params = new HashMap<>();
+        params.put("algID", "koEzGW9FGs");
+        params.put("hashCode", "O4LMWxq7Du6CWAlC1synsWdkPewMb4kDFZuwCHivU7w");
+        params.put("FMQw", "1");
+        params.put("q4f3", "zh-CN");
+        params.put("VPIf", "1");
+        params.put("custID", "133");
+        params.put("VEek", "unknown");
+        params.put("dzuS", "0");
+        params.put("yD16", "0");
+        params.put("EOQP", "4902a61a235fbb59700072139347967d");
+        params.put("lEnu", "3232243468");
+        params.put("jp76", "52d67b2a5aa5e031084733d5006cc664");
+        params.put("hAqN", "Win32");
+        params.put("platform", "WEB");
+        params.put("ks0Q", "d22ca0b81584fbea62237b14bd04c866");
+        params.put("TeRS", "824x1536");
+        params.put("tOHY", "24xx864x1536");
+        params.put("Fvje", "i1l1o1s1");
+        params.put("q5aJ", "-8");
+        params.put("wNLf", "99115dfb07133750ba677d055874de87");
+        params.put("0aew", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
+        params.put("E3gR", "f261c349945f631297a54071aab69cc8");
+        params.put("timestamp", null);
         return params;
     }
 
